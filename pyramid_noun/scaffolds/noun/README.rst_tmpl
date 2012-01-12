@@ -3,11 +3,4 @@
 
 Getting Started
 ---------------
-
-- cd <directory containing this file>
-
-- /bin/python setup.py develop
-
-- /bin/populate_{{project}} development.ini
-
-- /bin/pserve development.ini
+TODO
