@@ -13,14 +13,14 @@
 from pyramid.config import Configurator
 from sqlalchemy import engine_from_config
 
-from {{package}}.models.model import DBSession
+from {{package}}.models.model import DBSESSION
 
-def main(global_config, **settings):
+Def main(global_config, **settings):
     """
         Main function : returns a Pyramid WSGI application.
     """
     engine = engine_from_config(settings, 'sqlalchemy.')
-    DBSession.configure(bind=engine)
+    DBSESSION.configure(bind=engine)
     config = Configurator(settings=settings)
     config.add_static_view('static', '{{package}}:static', cache_max_age=3600)
     config.scan('{{package}}')

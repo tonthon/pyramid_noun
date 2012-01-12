@@ -16,7 +16,7 @@ import sys
 from sqlalchemy import engine_from_config
 from pyramid.paster import get_appsettings, setup_logging
 
-from {{package}}.models.model import DBSession, DBBASE
+from {{package}}.models.model import DBSESSION, DBBASE
 
 def initialize_sql(engine):
     """
