@@ -11,9 +11,14 @@ pyramid.includes = pyramid_debugtoolbar
                    pyramid_tm
 
 sqlalchemy.url = sqlite:///%(here)s/{{project}}.db
-mako.directories = {{project}}:templates
+mako.directories = {{package}}:templates
 mako.imports = from markupsafe import escape_silent
 mako.default_filters = escape_silent
+
+[pipeline:main]
+pipeline =
+    {{project}}
+
 
 
 [server:main]
