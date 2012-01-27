@@ -15,7 +15,7 @@ from sqlalchemy import engine_from_config
 
 from {{package}}.models.model import DBSESSION
 
-Def main(global_config, **settings):
+def main(global_config, **settings):
     """
         Main function : returns a Pyramid WSGI application.
     """
@@ -23,5 +23,6 @@ Def main(global_config, **settings):
     DBSESSION.configure(bind=engine)
     config = Configurator(settings=settings)
     config.add_static_view('static', '{{package}}:static', cache_max_age=3600)
+    config.add_route('index', '/')
     config.scan('{{package}}')
     return config.make_wsgi_app()
