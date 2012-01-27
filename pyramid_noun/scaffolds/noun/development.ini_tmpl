@@ -2,6 +2,8 @@
 use = egg:{{project}}
 
 pyramid.reload_templates = true
+pyramid.reload_assets = true
+pyramid.reload_all = true
 pyramid.debug_authorization = false
 pyramid.debug_notfound = false
 pyramid.debug_routematch = false
@@ -14,6 +16,7 @@ sqlalchemy.url = sqlite:///%(here)s/{{project}}.db
 mako.directories = {{package}}:templates
 mako.imports = from markupsafe import escape_silent
 mako.default_filters = escape_silent
+mako.module_directory = %(here)s/mako_compiled_templates
 
 [pipeline:main]
 pipeline =
