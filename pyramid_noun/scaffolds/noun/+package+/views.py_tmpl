@@ -15,7 +15,8 @@ from pyramid.view import view_config
 from pyramid.url import route_url, route_path
 from pyramid.httpexceptions import HTTPFound, HTTPNotFound
 
-#from {{package}}.models.model import DBSESSION
+from {{package}}.models import DBSESSION
+from {{package}}.models.model import User
 # DBSESSION is used to access database:
 #ex :
 #    session = DBSESSION()
@@ -27,3 +28,21 @@ def default_index(request):
         Return only a title for the page
     """
     return dict(title="Default page for pyramid projects from Majerti")
+
+@view_config(route_name='users', renderer='userlist.mako', request_method='GET')
+def users(request):
+    """
+        Returns the list of all users
+    """
+    session = DBSESSION()
+    users = session.query(User).all()
+    return dict(title='UserList', users=users)
+
+@view_config(route_name='user', renderer='user.mako', request_method='GET')
+def user(request):
+    """
+        Return a user object
+    """
+    session = DBSESSION()
+    user = session.query(User).filter_by(id=user_id).first()
+    return dict(title='User', user='user')
