@@ -13,16 +13,25 @@
 from pyramid.config import Configurator
 from sqlalchemy import engine_from_config
 
-from {{package}}.models.model import DBSESSION
+from {{package}}.models import initialize_sql
 
 def main(global_config, **settings):
     """
         Main function : returns a Pyramid WSGI application.
     """
     engine = engine_from_config(settings, 'sqlalchemy.')
-    DBSESSION.configure(bind=engine)
+    initialize_sql(engine)
     config = Configurator(settings=settings)
     config.add_static_view('static', '{{package}}:static', cache_max_age=3600)
     config.add_route('index', '/')
+
+    # REST API                                                                  
+    # using the four HTTP methods (POST, GET, PUT, DELETE), 
+    # translating them in (add, get, update, delete)
+    # and the two following routes, 
+    # we can get a very clean REST API
+    config.add_route("users", "/users")                                         
+    config.add_route("user", "/users/{uid}")
+
     config.scan('{{package}}')
     return config.make_wsgi_app()

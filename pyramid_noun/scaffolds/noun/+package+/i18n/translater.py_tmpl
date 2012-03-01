@@ -1,0 +1,27 @@
+# -*- coding: utf-8 -*-
+# * File Name : translater.py
+#
+# * Copyright (C) 2012 Majerti <tech@majerti.fr>
+#   This software is distributed under GPLV3
+#   License: http://www.gnu.org/licenses/gpl-3.0.txt
+#
+# * Creation Date : 18-02-2012
+# * Last Modified : sam. 18 févr. 2012 16:48:59 CET
+#
+# * Project : {{project}}
+#
+from pyramid.i18n import TranslationStringFactory
+from pyramid.i18n import get_localizer
+
+translater = TranslationStringFactory('{{project}}')
+
+def _(request, string, mapping=None):
+    """
+        returns the translated string regarding the current request's
+        linguage
+        Usage :
+        _(request, "My test string")
+    """
+    ts = translater(string, mapping)
+    localizer = get_localizer(request)
+    return localize.translate(ts)

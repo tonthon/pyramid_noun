@@ -16,15 +16,7 @@ import sys
 from sqlalchemy import engine_from_config
 from pyramid.paster import get_appsettings, setup_logging
 
-from {{package}}.models.model import DBSESSION, DBBASE
-
-def initialize_sql(engine):
-    """
-        Initialize the database constructing the models
-    """
-    DBSESSION.configure(bind=engine)
-    DBBASE.metadata.bind = engine
-    DBBASE.metadata.create_all(engine)
+from {{package}}.models import initialize_sql
 
 def usage(argv):
     cmd = os.path.basename(argv[0])
