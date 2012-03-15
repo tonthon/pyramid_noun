@@ -11,9 +11,15 @@
 # * Project :
 #
 from pyramid.config import Configurator
+
+from pyramid_beaker import session_factory_from_settings
+
 from sqlalchemy import engine_from_config
 
 from {{package}}.models import initialize_sql
+
+from {{package}}.security import RootFactory
+from {{package}}.avatar import build_avatar
 
 def main(global_config, **settings):
     """
@@ -21,16 +27,22 @@ def main(global_config, **settings):
     """
     engine = engine_from_config(settings, 'sqlalchemy.')
     initialize_sql(engine)
-    config = Configurator(settings=settings)
+
+    config = Configurator(settings=settings,
+                          session_factory=session_factory,
+                          authentication_policy=auth_policy,
+                          authorization_policy=acl_policy,
+                          root_factory=RootFactory,
+                          )
     config.add_static_view('static', '{{package}}:static', cache_max_age=3600)
     config.add_route('index', '/')
 
-    # REST API                                                                  
-    # using the four HTTP methods (POST, GET, PUT, DELETE), 
+    # REST API
+    # using the four HTTP methods (POST, GET, PUT, DELETE),
     # translating them in (add, get, update, delete)
-    # and the two following routes, 
+    # and the two following routes,
     # we can get a very clean REST API
-    config.add_route("users", "/users")                                         
+    config.add_route("users", "/users")
     config.add_route("user", "/users/{uid}")
 
     config.scan('{{package}}')

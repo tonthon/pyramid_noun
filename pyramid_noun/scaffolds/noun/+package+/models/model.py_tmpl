@@ -14,19 +14,19 @@ from sqlalchemy import Table
 from sqlalchemy import Column
 from sqlalchemy import Integer
 from sqlalchemy import ForeignKey
-from sqlalchemy import String 
+from sqlalchemy import String
 
 from sqlalchemy.ext import declarative
 from sqlalchemy.orm import relationship
 
-from {{project}}.models import DBBASE
+from {{package}}.models import DBBASE
 
-useremails = Table('useremaillink', DBBASE.metadata,                  
-                        Column('user_id', Integer,                                              
-                                ForeignKey('user.id')),                                             
-                        Column('user_email_id', Integer,                                        
-                                ForeignKey('user_email.id'))                                        
-                            )                         
+useremails = Table('useremaillink', DBBASE.metadata,
+                        Column('user_id', Integer,
+                                ForeignKey('user.id')),
+                        Column('user_email_id', Integer,
+                                ForeignKey('user_email.id'))
+                            )
 
 class User(DBBASE):
     """
@@ -35,17 +35,17 @@ class User(DBBASE):
     __tablename__ = "user"
     id = Column(Integer, primary_key=True)
     name = Column(String(255), nullable=False)
-    emails = relationship("EMailAddress", 
-                            secondary=useremails,            
+    emails = relationship("EMailAddress",
+                            secondary=useremails,
                             backref='users')
 
     def __init__(self, name):
         self.name = name
 
-class EMailAddress(DBBASE):                                                     
-    """                                                                         
-        Email address object                                                      
-    """                                                                         
-    __tablename__ = 'user_email'                                                
-    id = Column(Integer, primary_key=True)                                      
+class EMailAddress(DBBASE):
+    """
+        Email address object
+    """
+    __tablename__ = 'user_email'
+    id = Column(Integer, primary_key=True)
     address = Column(String(255), nullable=False, unique=True)
