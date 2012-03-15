@@ -9,8 +9,8 @@
 <meta name="KEYWORDS" CONTENT="">
 <meta NAME="ROBOTS" CONTENT="INDEX,FOLLOW,ALL">
 </%block>
-<link href="${request.static_url('{{project}}:static/css/default.css')}" rel="stylesheet"  type="text/css" />
-<link href="${request.static_url('{{project}}:static/css/main.css')}" rel="stylesheet"  type="text/css" />
+<link href="${request.static_url('{{package}}:static/css/default.css')}" rel="stylesheet"  type="text/css" />
+<link href="${request.static_url('{{package}}:static/css/main.css')}" rel="stylesheet"  type="text/css" />
 <%block name="headjs" />
 <%block name="css" />
 </head>

@@ -6,9 +6,9 @@
 #   License: http://www.gnu.org/licenses/gpl-3.0.txt
 #
 # * Creation Date : 18-02-2012
-# * Last Modified : sam. 18 févr. 2012 16:55:33 CET
+# * Last Modified : jeu. 15 mars 2012 16:25:46 CET
 #
-# * Project : {{project}}
+# * Project : {{package}}
 #
 
 from sqlalchemy.ext import declarative
